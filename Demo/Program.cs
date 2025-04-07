@@ -1,4 +1,5 @@
-﻿using static Demo.ListGenerator;
+﻿using System.Text.RegularExpressions;
+using static Demo.ListGenerator;
 namespace Demo
 {
     internal class Program
@@ -208,13 +209,44 @@ namespace Demo
 
             //-----------------------------------------
 
-            int[] Numbers = { 5, 0, 1, 3, 6, 9, 4 };
-            //var Result = Numbers.TakeWhile((n, i) => n > i);
-            var Result = Numbers.SkipWhile(n => n%3 != 0);
+            //int[] Numbers = { 5, 0, 1, 3, 6, 9, 4 };
+            ////var Result = Numbers.TakeWhile((n, i) => n > i);
+            //var Result = Numbers.SkipWhile(n => n%3 != 0);
+            //foreach (var item in Result)
+            //{
+            //    Console.WriteLine(item);
+            //}
+            #endregion
+            #region Part 11 Let & Into
+            var Name = new List<string>() { "Islammmm", "Ahmed", "Abdo", "Rana"};
+
+            var Result = from N in Name
+                         select Regex.Replace(N, "[aeiouAEIOU]", string.Empty)
+                         //Restart Query with inroducing new range Variable : NoVowlName
+                         into NoVowlName
+                         where NoVowlName.Length > 3
+                         select NoVowlName;
+            // The into keyword is used to introduce a new range variable in the query
+            
+            //---------------------------------------
+            
+            Result = from N in Name
+                     let NoVowlName = Regex.Replace(N, "[aeiouAEIOU]", string.Empty)
+                     // let here continue Query with Range Variable : NoVowlName
+                     where NoVowlName.Length > 3
+                     select NoVowlName;
+
+            //--------------------------------------------------------------------------------
+            Result = Name.Select(n => Regex.Replace(n, "[aeiouAEIOU]", string.Empty))
+                .Where(NoVowlName => NoVowlName.Length > 3);
+
             foreach (var item in Result)
             {
                 Console.WriteLine(item);
             }
+
+            // The let keyword is used to create a new variable in the query
+
             #endregion
 
         }

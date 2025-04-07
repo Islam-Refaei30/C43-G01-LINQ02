@@ -157,31 +157,64 @@ namespace Demo
 
             #endregion
             #region Example 02      
-            var Result = from P in ProductList
-                         where P.UnitsInStock > 0
-                         group P by P.Category into Group
-                         where Group.Count() > 10
-                         select new
-                         {
-                             Category = Group.Key,
-                             Count = Group.Count(),
-                         };
-            // Her return a sequence of anonymous type where each element contains the category and the count of elements in that category
+            //var Result = from P in ProductList
+            //             where P.UnitsInStock > 0
+            //             group P by P.Category into Group
+            //             where Group.Count() > 10
+            //             select new
+            //             {
+            //                 Category = Group.Key,
+            //                 Count = Group.Count(),
+            //             };
+            //// Her return a sequence of anonymous type where each element contains the category and the count of elements in that category
 
-            Result = ProductList.Where(P => P.UnitsInStock > 0)
-                .GroupBy(P => P.Category)
-                .Where(p => p.Count() > 10)
-                .Select(p => new
-                {
-                    Category = p.Key,
-                    Count = p.Count(),
-                });
+            //Result = ProductList.Where(P => P.UnitsInStock > 0)
+            //    .GroupBy(P => P.Category)
+            //    .Where(p => p.Count() > 10)
+            //    .Select(p => new
+            //    {
+            //        Category = p.Key,
+            //        Count = p.Count(),
+            //    });
 
-            foreach (var product in Result)
-            {
-                Console.WriteLine(product);
-            }
+            //foreach (var product in Result)
+            //{
+            //    Console.WriteLine(product);
+            //}
             #endregion
+            #endregion
+            #region Part 10 Partition Operators
+            // Partition Operators is used to split a sequence into two or more sequences
+            /*
+             * Skip - SkipWhile - Take - TakeWhile - takeUntil - takeLast
+             * skip: skips the first n elements of a sequence
+             * skipWhile: skips elements of a sequence as long as a condition is true
+             * take: takes the first n elements of a sequence
+             * takeWhile: takes elements of a sequence as long as a condition is true
+             * takeUntil: takes elements of a sequence until a condition is true
+             * takeLast: takes the last n elements of a sequence
+             */
+
+            //----------------------------------------
+
+            //var Result = ProductList.Where(p => p.UnitsInStock > 0).Take(3);
+            //Result = ProductList.Where(p => p.UnitsInStock > 0).TakeLast(3);
+            //Result = ProductList.Where(p => p.UnitsInStock > 0).Skip(3);
+            //Result = ProductList.Where(p => p.UnitsInStock > 0).SkipLast(3);
+            //foreach (var item in Result)
+            //{
+            //    Console.WriteLine(item);
+            //}
+
+            //-----------------------------------------
+
+            int[] Numbers = { 5, 0, 1, 3, 6, 9, 4 };
+            //var Result = Numbers.TakeWhile((n, i) => n > i);
+            var Result = Numbers.SkipWhile(n => n%3 != 0);
+            foreach (var item in Result)
+            {
+                Console.WriteLine(item);
+            }
             #endregion
 
         }

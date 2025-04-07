@@ -113,11 +113,30 @@ namespace Demo
 
             #endregion
             #region SequanceEqual
-            var sq01 = Enumerable.Range(0, 100);
-            var sq02 = Enumerable.Range(0, 100);
-            Console.WriteLine(sq01.SequenceEqual(sq02));
-            // Return true if the two sequences are equal
+            //var sq01 = Enumerable.Range(0, 100);
+            //var sq02 = Enumerable.Range(0, 100);
+            //Console.WriteLine(sq01.SequenceEqual(sq02));
+            //// Return true if the two sequences are equal
             #endregion
+            #endregion
+            #region Part 08 Transformation Opertors - Zip Opertor
+            List<string> Words = new List<string>() { "Ten", "Twenty", "Thirty", "Fourty" };
+            int[] Numbers = [10, 20, 30, 40, 50];
+            var Result01 = Numbers.Zip(Words);
+            // Zip operator is used to merge two sequences into one sequence
+            // The result is a sequence of tuples, where each tuple contains one element from each sequence
+            // The first element of the tuple is from the first sequence, and the second element is from the second sequence
+            // The Length of the result sequence is the same as the length of the shorter sequence
+
+            var Result02 = Numbers.Zip(Words, (number,word)=> $"{number}={word}");
+
+            var Result03 = Numbers.Zip(Words, [1, 2, 3]);
+            // The result is a sequence of tuples, where each tuple contains one element from each sequence
+
+            foreach (var item in Result03)
+            {
+                Console.WriteLine(item);
+            };
             #endregion
 
         }

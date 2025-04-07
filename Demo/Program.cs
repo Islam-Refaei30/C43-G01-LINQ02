@@ -67,19 +67,34 @@ namespace Demo
             //Hybrid Syntax : Fluent Syntax + Query Syntax
             // (Query Syntax).Fluent Syntax
 
-            var Result = (from P in ProductList
-                          where P.UnitsInStock == 0
-                          select new 
-                          {
-                              P.ProductID,
-                              P.ProductName,
-                              P.Category,
-                              P.UnitPrice,
-                              P.UnitsInStock
-                          }).FirstOrDefault();
-            Console.WriteLine(Result);
+            //var Result = (from P in ProductList
+            //              where P.UnitsInStock == 0
+            //              select new 
+            //              {
+            //                  P.ProductID,
+            //                  P.ProductName,
+            //                  P.Category,
+            //                  P.UnitPrice,
+            //                  P.UnitsInStock
+            //              }).FirstOrDefault();
+            //Console.WriteLine(Result);
             #endregion
             #endregion
+            #region Part 05 Generation Operators 
+            //var Result = Enumerable.Range(0, 100);
+            //var Result = Enumerable.Repeat(0, 100);
+            //var Result = Enumerable.Repeat("dd", 100);
+            var Result = Enumerable.Repeat(new Product(), 100);
+            //------------------------------------
+            var ArryProduct = Enumerable.Empty<Product>().ToArray();
+            // Will Generate an empty array of Product
+            foreach (var item in Result)
+            {
+                Console.WriteLine($" {item}\t ");
+            }
+
+            #endregion
+
         }
     }
 }

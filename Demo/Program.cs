@@ -120,23 +120,68 @@ namespace Demo
             #endregion
             #endregion
             #region Part 08 Transformation Opertors - Zip Opertor
-            List<string> Words = new List<string>() { "Ten", "Twenty", "Thirty", "Fourty" };
-            int[] Numbers = [10, 20, 30, 40, 50];
-            var Result01 = Numbers.Zip(Words);
-            // Zip operator is used to merge two sequences into one sequence
-            // The result is a sequence of tuples, where each tuple contains one element from each sequence
-            // The first element of the tuple is from the first sequence, and the second element is from the second sequence
-            // The Length of the result sequence is the same as the length of the shorter sequence
+            //List<string> Words = new List<string>() { "Ten", "Twenty", "Thirty", "Fourty" };
+            //int[] Numbers = [10, 20, 30, 40, 50];
+            //var Result01 = Numbers.Zip(Words);
+            //// Zip operator is used to merge two sequences into one sequence
+            //// The result is a sequence of tuples, where each tuple contains one element from each sequence
+            //// The first element of the tuple is from the first sequence, and the second element is from the second sequence
+            //// The Length of the result sequence is the same as the length of the shorter sequence
 
-            var Result02 = Numbers.Zip(Words, (number,word)=> $"{number}={word}");
+            //var Result02 = Numbers.Zip(Words, (number,word)=> $"{number}={word}");
 
-            var Result03 = Numbers.Zip(Words, [1, 2, 3]);
-            // The result is a sequence of tuples, where each tuple contains one element from each sequence
+            //var Result03 = Numbers.Zip(Words, [1, 2, 3]);
+            //// The result is a sequence of tuples, where each tuple contains one element from each sequence
 
-            foreach (var item in Result03)
+            //foreach (var item in Result03)
+            //{
+            //    Console.WriteLine(item);
+            //};
+            #endregion
+            #region Part 09 Grouping Operators[Part 01]
+            #region Example 01
+            //var Result = from p in ProductList
+            //             group p by p.Category;
+            //// The grouping operator is used to group elements in a sequence by a specified key
+
+            //var Result02= ProductList.GroupBy(P => P.Category);
+
+            //foreach (var Group in Result02)
+            //{
+            //    Console.WriteLine($"  {Group.Key}"); // Key is represent Category
+            //    foreach (var Product in Group)
+            //    {
+            //        Console.WriteLine($"       {Product}");
+            //    }
+            //}
+
+            #endregion
+            #region Example 02      
+            var Result = from P in ProductList
+                         where P.UnitsInStock > 0
+                         group P by P.Category into Group
+                         where Group.Count() > 10
+                         select new
+                         {
+                             Category = Group.Key,
+                             Count = Group.Count(),
+                         };
+            // Her return a sequence of anonymous type where each element contains the category and the count of elements in that category
+
+            Result = ProductList.Where(P => P.UnitsInStock > 0)
+                .GroupBy(P => P.Category)
+                .Where(p => p.Count() > 10)
+                .Select(p => new
+                {
+                    Category = p.Key,
+                    Count = p.Count(),
+                });
+
+            foreach (var product in Result)
             {
-                Console.WriteLine(item);
-            };
+                Console.WriteLine(product);
+            }
+            #endregion
             #endregion
 
         }

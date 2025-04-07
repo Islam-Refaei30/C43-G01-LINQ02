@@ -84,15 +84,40 @@ namespace Demo
             //var Result = Enumerable.Range(0, 100);
             //var Result = Enumerable.Repeat(0, 100);
             //var Result = Enumerable.Repeat("dd", 100);
-            var Result = Enumerable.Repeat(new Product(), 100);
-            //------------------------------------
-            var ArryProduct = Enumerable.Empty<Product>().ToArray();
-            // Will Generate an empty array of Product
-            foreach (var item in Result)
-            {
-                Console.WriteLine($" {item}\t ");
-            }
+            //var Result = Enumerable.Repeat(new Product(), 100);
+            ////------------------------------------
+            //var ArryProduct = Enumerable.Empty<Product>().ToArray();
+            //// Will Generate an empty array of Product
+            //foreach (var item in Result)
+            //{
+            //    Console.WriteLine($" {item}\t ");
+            //}
 
+            #endregion
+            #region Part 07 Quantifier Operators = Return Boolean Value
+            #region Any
+            //Console.WriteLine(ProductList.Any());
+            //// Return true if any element in the sequence
+
+            //Console.WriteLine(ProductList.Any(P => P.UnitsInStock == 0));
+            //// Return true if any element in the sequence that match the condition
+
+            #endregion
+            #region All
+            //Console.WriteLine(ProductList.All(p => p.UnitsInStock == 0));
+            //// Return true if all elements in the sequence that match the condition
+            #endregion
+            #region Contains
+            //Console.WriteLine(ProductList.Contains(ProductList[0]));
+            //// Return true if the sequence contains the specified element
+
+            #endregion
+            #region SequanceEqual
+            var sq01 = Enumerable.Range(0, 100);
+            var sq02 = Enumerable.Range(0, 100);
+            Console.WriteLine(sq01.SequenceEqual(sq02));
+            // Return true if the two sequences are equal
+            #endregion
             #endregion
 
         }
